@@ -10,7 +10,7 @@ int main(void)
 		Phonebook phonebook;
 		
 		if (phonebook.get_input() == "ADD")
-			Contact.add_data();
+			Contact.add_data(); 
 		else if (phonebook.get_input() == "SEARCh")
 
 		else if (phonebook.get_input() == "EXIT")
