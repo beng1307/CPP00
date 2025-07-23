@@ -55,7 +55,7 @@ void Contact::set_phone_number(std::string data)
 
 std::string	Contact::get_phone_number(void)
 {
-	return (last_name);
+	return (phone_number);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

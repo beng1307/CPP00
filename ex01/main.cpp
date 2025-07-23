@@ -3,16 +3,19 @@
 
 int main(void)
 {
-	std::cout << "Commands: ADD, SEARCH, EXIT" << std::endl;
+	Phonebook	phonebook(0);
+	std::string	input;
+
 	while (1)
 	{
-		Phonebook phonebook(0);
-		
-		if (phonebook.get_input() == "ADD")
+		std::cout << "Commands: ADD, SEARCH, EXIT" << std::endl;
+		std::cin >> input;
+
+		if (input == "ADD")
 			phonebook.add();
-		else if (phonebook.get_input() == "SEARCH")
+		else if (input == "SEARCH")
 			phonebook.search();
-		else if (phonebook.get_input() == "EXIT")
+		else if (input == "EXIT")
 			break ;
 	}
 	return (0);
