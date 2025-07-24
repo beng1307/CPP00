@@ -1,4 +1,4 @@
-COMPILE = c++ -g -Wall -Wextra -Werror -std=c++98
+COMPILE = c++ -Wall -Wextra -Werror -std=c++98
 NAME = phonebook
 SRCS = main.cpp Phonebook.cpp Contact.cpp
 OBJS_FOLDER = obj
