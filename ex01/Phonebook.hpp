@@ -2,6 +2,7 @@
 # define PHONEBOOK_HPP
 
 #include <string>
+#include "Contact.hpp"
 
 class	Phonebook
 {
@@ -27,7 +28,9 @@ class	Phonebook
 
 		std::string get_input(void);
 		void		add_data(void);
-		void		insert_data(int index);
+		void		insert_data(void);
+		void		print_options(Contact current, int index);
+		int			phonebook_atoi(std::string input);
 		bool		is_wrong(std::string);
 		bool		correct_input(void);
 };

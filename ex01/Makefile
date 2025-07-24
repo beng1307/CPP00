@@ -1,20 +1,20 @@
-COMPILE = c++ -Wall -Wextra -Werror -std=c++98
+COMPILE = c++ -g -Wall -Wextra -Werror -std=c++98
 NAME = phonebook
-SRCS = phonebook.cpp
-OBJS = $(OBJS_FOLDER)/%.o
+SRCS = main.cpp Phonebook.cpp Contact.cpp
 OBJS_FOLDER = obj
+OBJS = $(SRCS:%.cpp=$(OBJS_FOLDER)/%.o)
 
 $(NAME): $(OBJS)
 	$(COMPILE) $(OBJS) -o $(NAME) 
 
 $(OBJS_FOLDER)/%.o: %.cpp
-	@mkdir -p %(OBJS_FOLDER)
+	@mkdir -p $(OBJS_FOLDER)
 	$(COMPILE) -c $< -o $@
 
 all: $(NAME)
 
 clean:
-	@rm -rf $(OBJSFOLDER)
+	@rm -rf $(OBJS_FOLDER)
 
 fclean:	clean
 	@rm -f $(NAME)
