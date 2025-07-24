@@ -33,7 +33,7 @@ class	Contact
 		void		set_darkest_secret(std::string data);
 		std::string	get_darkest_secret(void);
 
-		bool	empty(void);
+		bool		empty(void);
 
 };
 
