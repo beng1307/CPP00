@@ -5,11 +5,6 @@ Contact::Contact(void)
 	return ;
 };
 
-Contact::~Contact(void)
-{
-	return ;
-};
-
 ///////////////////////////////////////////////////////////////////////////////
 
 void Contact::set_first_name(std::string data)

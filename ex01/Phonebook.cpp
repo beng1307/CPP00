@@ -12,11 +12,6 @@ Phonebook::Phonebook(int count) : contact_count(count)
 	return ;
 }
 
-Phonebook::~Phonebook(void)
-{
-	return ;
-}
-
 ///////////////////////////////////////////////////////////////////////////////
 
 void	Phonebook::insert_data(void)
