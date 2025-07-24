@@ -34,7 +34,6 @@ class	Contact
 		std::string	get_darkest_secret(void);
 
 		bool		empty(void);
-
 };
 
 #endif

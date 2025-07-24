@@ -9,7 +9,7 @@ int main(void)
 	while (1)
 	{
 		std::cout << "Commands: ADD, SEARCH, EXIT" << std::endl;
-		std::cin >> input;
+		std::getline(std::cin, input);
 
 		if (input == "ADD")
 			phonebook.add();

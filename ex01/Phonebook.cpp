@@ -22,15 +22,13 @@ Phonebook::~Phonebook(void)
 void	Phonebook::insert_data(void)
 {
 	std::cout << "First name: " << std::endl; 
-	std::cin >> first_name_input;
+	std::getline(std::cin, first_name_input);
 	
 	std::cout << "Last name: " << std::endl;
-	std::cin >> last_name_input;
-	
+	std::getline(std::cin, last_name_input);
+
 	std::cout << "Nickname: " << std::endl; 
-	std::cin >> nickname_input;
-	
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	std::getline(std::cin, nickname_input);
 
 	std::cout << "Phone number: " << std::endl;
 	std::getline(std::cin, phone_number_input);
@@ -46,24 +44,49 @@ bool	Phonebook::is_wrong(std::string input)
 	for (int i = 0; i < (int)input.size(); i++)
 	{
 		if (!std::isspace(input[i]))
-		return (false);
+			return (false);
 	}
 	return (true);
+}
+
+bool	Phonebook::is_number_wrong(std::string input)
+{
+	bool	spaces_only = true;
+
+	if (input.empty())
+		return (false);
+	for (int i = 0; i < (int)input.size(); i++)
+	{
+		if (!std::isspace(input[i]))
+			spaces_only = false;
+		if (!std::isdigit(input[i]) && !std::isspace(input[i]))
+			return (true);
+	}
+	if (spaces_only)
+		return (true);
+	else
+		return (false);
 }
 
 bool	Phonebook::correct_input(void)
 {
 	return (!is_wrong(first_name_input) && !is_wrong(last_name_input) && !is_wrong(nickname_input)
-	&& !is_wrong(phone_number_input) && !is_wrong(darkest_secret_input));
+	&& !is_number_wrong(phone_number_input) && !is_wrong(darkest_secret_input));
 }
 
 void	Phonebook::add_data(void)
 {
-	contacts[contact_count].set_first_name(first_name_input);
-	contacts[contact_count].set_last_name(last_name_input);
-	contacts[contact_count].set_nickname(nickname_input);
-	contacts[contact_count].set_phone_number(phone_number_input);
-	contacts[contact_count].set_darkest_secret(darkest_secret_input);
+	int	contact_to_set;
+
+	if (contact_count < 8)
+		contact_to_set = contact_count;
+	else
+		contact_to_set = contact_count - 1;
+	contacts[contact_to_set].set_first_name(first_name_input);
+	contacts[contact_to_set].set_last_name(last_name_input);
+	contacts[contact_to_set].set_nickname(nickname_input);
+	contacts[contact_to_set].set_phone_number(phone_number_input);
+	contacts[contact_to_set].set_darkest_secret(darkest_secret_input);
 }
 
 void	Phonebook::add(void)
@@ -73,7 +96,7 @@ void	Phonebook::add(void)
 	if (contact_count < 8)
 	{
 		while (!contacts[index].empty() && index < 8)
-		index++;
+			index++;
 		insert_data();	
 	}
 	else
@@ -88,10 +111,13 @@ void	Phonebook::add(void)
 	if (correct_input())
 	{
 		add_data();
-		contact_count++;
+		if (contact_count < 8)
+			contact_count++;
 	}
 	else
-	std::cout << "Wrong data input!" << std::endl;
+		std::cout << "\033[1;31m"
+			<< "Wrong data input, contact won't be saved!"
+				<< "\033[0m" <<  std::endl;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -155,7 +181,7 @@ void Phonebook::search(void)
 	if (!contacts[0].empty())
 	{
 		std::cout << "Which entry do u want to display?" << std::endl;
-		std::cin >> input;
+		std::getline(std::cin, input);
 		
 		entry = phonebook_atoi(input);
 		if (entry > 0 && entry <= contact_count)
@@ -167,15 +193,7 @@ void Phonebook::search(void)
 			std::cout << contacts[entry - 1].get_darkest_secret() << std::endl;
 		}
 		else
-			std::cout << "Entry not existent!" << std::endl;
+			std::cout << "\033[1;31m" << "Entry not existent!" << "\033[0m" << std::endl;
 	}
 
 }
-
-///////////////////////////////////////////////////////////////////////////////
-
-std::string Phonebook::get_input(void)
-{
-	return (input);
-}
-
